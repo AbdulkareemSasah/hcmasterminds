@@ -13,15 +13,12 @@ return new class extends Migration
     {
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('department_id');
-            $table->foreign('department_id')->references('id')->on('departments');
-            $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->string("title");
-            $table->text("description");
+            $table->foreignId('course_id')->constrained()->noActionOnDelete();
+            $table->json("title");
+            $table->json("description");
             $table->string("image");
-            $table->string("body");
-            $table->boolean('is_published')->default(1);
+            $table->json("content");
+            $table->boolean('published')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

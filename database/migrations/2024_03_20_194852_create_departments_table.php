@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
+            $table->json("title");
+            $table->json("description");
+            $table->json("content");
+            $table->string("image");
+            $table->boolean('published')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
